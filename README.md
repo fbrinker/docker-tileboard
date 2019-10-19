@@ -8,7 +8,7 @@ It contains the sources and starts a simple Python3 webserver to serve TileBoard
 
 ## Usage
 
-You have to mount your `config.js` file into the `/tileboard` directory of the Docker container.
+You have to mount your `config.js` file into the `/tileboard` directory of the Docker container. You can see an [example config.js file in the official repository](https://github.com/resoai/TileBoard/blob/master/config.example.js).
 
 ## Example
 
