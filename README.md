@@ -1,6 +1,6 @@
 # TileBoard Docker-Container
 
-[![Build Status](https://cd.f-brinker.de/api/badges/fbrinker/docker-tileboard/status.svg)](https://cd.f-brinker.de/fbrinker/docker-tileboard)
+[![Build Status](https://drone.f-brinker.de/api/badges/fbrinker/docker-tileboard/status.svg)](https://drone.f-brinker.de/fbrinker/docker-tileboard)
 
 This is a very basic Docker container for [TileBoard](https://github.com/resoai/TileBoard), "a simple yet highly configurable Dashboard for HomeAssistant".
 
