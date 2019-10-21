@@ -6,7 +6,8 @@ This is a very basic Docker container for [TileBoard](https://github.com/resoai/
 
 It contains the sources and starts a simple Python3 webserver to serve TileBoard at port 8000.
 
-## Contribute
+### Contribute
+
 You can open any new issues [here](https://git.f-brinker.de/fbrinker/docker-tileboard/issues).
 **The builds are automated** on changes of the official TileBoard repository.
 
