@@ -6,6 +6,8 @@ This is a very basic Docker container for [TileBoard](https://github.com/resoai/
 
 It contains the sources and starts a simple Python3 webserver to serve TileBoard at port 8000.
 
+The builds are automated on changes of the official TileBoard repository.
+
 ## Usage
 
 You have to mount your `config.js` file into the `/tileboard` directory of the Docker container. You can see an [example config.js file in the official repository](https://github.com/resoai/TileBoard/blob/master/config.example.js).
