@@ -1,13 +1,8 @@
 FROM python:alpine
+LABEL maintainer="mail+docker@f-brinker.de"
 
-MAINTAINER Florian Brinker "mail+docker@f-brinker.de"
-
-# Install Git
-RUN apk update && \
-    apk add --no-cache bash git
-
-# Clone Tileboard
-RUN git clone https://github.com/resoai/TileBoard.git /tileboard
+# Insert Tileboard
+COPY ./files/ /tileboard/
 
 # Start Server
 WORKDIR /tileboard

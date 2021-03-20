@@ -1,8 +1,15 @@
 ---
 kind: pipeline
+type: docker
 name: default
 
 steps:
+- name: build
+  image: alpine
+  commands:
+    - apk update && apk add bash grep sed curl unzip
+    - ./build.sh
+
 - name: docker  
   image: plugins/docker
   settings:
