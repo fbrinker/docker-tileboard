@@ -45,5 +45,3 @@ if [ ! -f "./files/index.html" ]; then
     echo "File ./files/index.html does not exist"
     exit 1
 fi
-
-exit 1
