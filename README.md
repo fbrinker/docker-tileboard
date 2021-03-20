@@ -20,12 +20,12 @@ You have to mount your `config.js` file into the `/tileboard` directory of the D
 
 ## Versions / Tags
 
-Besides the latest version, you can listen to updates for a specific versions:
+Besides the latest version, you can listen to updates for a specific version:
   * fbrinker/tileboard *(same as :latest)*
   * fbrinker/tileboard:latest
   * fbrinker/tileboard:2
-  * fbrinker/tileboard:2.0
-  * fbrinker/tileboard:2.0.0
+  * fbrinker/tileboard:2.2
+  * fbrinker/tileboard:2.2.0
 
 ## Example
 
