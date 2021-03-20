@@ -35,3 +35,26 @@ services:
 ```
 
 After a `docker-compose up -d`, you can reach your TileBoard instance under `http://[yourhost-or-ip]:8234`.
+
+## Extended Example
+
+I am using it in my docker-compose file like this, with my config.js, secrets and other customizations:
+
+```yaml
+# Home Assistant Tileboard
+tileboard:
+  container_name: tileboard
+  image: fbrinker/tileboard
+  hostname: tileboard
+  volumes:
+    - ./tileboard/config/config.js:/tileboard/config.js
+    - ./tileboard/config/secrets.js:/tileboard/includes/config/secrets.js
+    - ./tileboard/config/pages:/tileboard/includes/pages
+    - ./tileboard/styles/background.png:/tileboard/images/background.png
+    - ./tileboard/styles/custom.css:/tileboard/styles/custom.css
+  ports:
+    - "8234:8000"
+  restart: unless-stopped
+  depends_on:
+    - homeassistant
+```
