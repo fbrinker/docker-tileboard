@@ -25,7 +25,7 @@ MAJOR=${SEMVER[0]}
 MINOR=${SEMVER[0]}.${SEMVER[1]}
 PATCH=$LATEST
 
-echo "test,$MAJOR,$MINOR,$PATCH" > .tags
+echo "latest,$MAJOR,$MINOR,$PATCH" > .tags
 
 downloadLatestRelease "files.zip"
 
