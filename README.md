@@ -18,6 +18,15 @@ Have a look at the [Dockerfile](https://git.f-brinker.de/fbrinker/docker-tileboa
 
 You have to mount your `config.js` file into the `/tileboard` directory of the Docker container. You can see an [example config.js file in the official repository](https://github.com/resoai/TileBoard/blob/master/config.example.js).
 
+## Versions / Tags
+
+Besides the latest version, you can listen to updates for a specific versions:
+  * fbrinker/tileboard *(same as :latest)*
+  * fbrinker/tileboard:latest
+  * fbrinker/tileboard:2
+  * fbrinker/tileboard:2.0
+  * fbrinker/tileboard:2.0.0
+
 ## Example
 
 Here is an example, using Docker-Compose:
