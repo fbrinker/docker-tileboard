@@ -8,6 +8,7 @@ steps:
   image: alpine
   commands:
     - apk update && apk add bash grep sed curl unzip
+    - chmod +x ./build.sh
     - ./build.sh
 
 - name: docker  
