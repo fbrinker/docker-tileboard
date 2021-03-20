@@ -50,7 +50,7 @@ After a `docker-compose up -d`, you can reach your TileBoard instance under `htt
 I am using it in my docker-compose file like this, with my config.js, secrets and other customizations:
 
 ```yaml
-# Home Assistant Tileboard
+# Home Assistant TileBoard
 tileboard:
   container_name: tileboard
   image: fbrinker/tileboard
@@ -67,3 +67,5 @@ tileboard:
   depends_on:
     - homeassistant
 ```
+
+Note: You should never expose TileBoard to the web.
