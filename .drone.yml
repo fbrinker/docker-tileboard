@@ -7,11 +7,11 @@ steps:
 - name: build
   image: alpine
   commands:
-    - apk update && apk add bash grep sed curl unzip
+    - apk update && apk add bash grep sed curl unzip jq
     - chmod +x ./build.sh
     - ./build.sh
 
-- name: docker  
+- name: docker
   image: plugins/docker
   settings:
     repo: fbrinker/tileboard
@@ -19,7 +19,7 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-      
+
 trigger:
   branch:
   - master
