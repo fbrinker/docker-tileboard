@@ -4,14 +4,13 @@ type: docker
 name: default
 
 steps:
-- name: build
+- name: Build Dockerfile
   image: alpine
   commands:
-    - apk update && apk add bash grep sed curl unzip jq
-    - chmod +x ./build.sh
+    - apk update && apk add bash curl grep jq sed
     - ./build.sh
 
-- name: docker
+- name: Build & Publish Image
   image: plugins/docker
   settings:
     repo: fbrinker/tileboard

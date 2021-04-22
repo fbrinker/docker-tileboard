@@ -9,13 +9,12 @@ getVersionFromLatestRelease() {
     echo "$version"
 }
 
-downloadLatestRelease() {
+getDownloadUrl() {
     url=`curl -s "https://api.github.com/repos/resoai/TileBoard/releases/latest" \
         | grep "browser_download_url" \
         | cut -d '"' -f 4`
-    echo "Url: $url"
     
-    curl -sL -o $1 ${url}
+    echo "$url"
 }
 
 getLatestPublishedTag() {
@@ -32,7 +31,7 @@ if [ "$LATEST_RELEASE" = "$LATEST_TAG" ]; then
     echo "Nothing to do. Versions already match."
     echo "Release: $LATEST_RELEASE"
     echo "Tag: $LATEST_TAG"
-    exit 78 # drone.io exit code to stop but success the pipeline
+    #exit 78 # drone.io exit code to stop but success the pipeline
 fi
 
 SEMVER=( ${LATEST_RELEASE//./ } )
@@ -42,21 +41,7 @@ PATCH=$LATEST_RELEASE
 
 echo "latest,$MAJOR,$MINOR,$PATCH" > .tags
 
-downloadLatestRelease "files.zip"
+RELEASE_URL=`getDownloadUrl`
 
-if [ ! -f "./files.zip" ]; then
-    echo "Download ./files.zip does not exist"
-    exit 1
-fi
-
-unzip files.zip -d files
-
-if [ ! -d "./files" ]; then
-    echo "Directory ./files does not exist"
-    exit 1
-fi
-
-if [ ! -f "./files/index.html" ]; then
-    echo "File ./files/index.html does not exist"
-    exit 1
-fi
+echo "Writing $RELEASE_URL into Dockerfile..."
+sed -i "s|%RELEASE_URL%|$RELEASE_URL|g" ./Dockerfile
