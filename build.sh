@@ -31,7 +31,7 @@ if [ "$LATEST_RELEASE" = "$LATEST_TAG" ]; then
     echo "Nothing to do. Versions already match."
     echo "Release: $LATEST_RELEASE"
     echo "Tag: $LATEST_TAG"
-    #exit 78 # drone.io exit code to stop but success the pipeline
+    exit 78 # drone.io exit code to stop but success the pipeline
 fi
 
 SEMVER=( ${LATEST_RELEASE//./ } )
