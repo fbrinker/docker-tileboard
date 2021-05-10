@@ -27,6 +27,11 @@ Besides the latest version, you can listen to updates for a specific version:
   * fbrinker/tileboard:2.2
   * fbrinker/tileboard:2.2.0
 
+Additionally, there are `nightly` and `dev` builds as follows:
+  * `fbrinker/tileboard:nightly` contains a nightly build of TileBoard's `master` branch. Use it to have the most bleeding edge changes, which have not made it into a release yet.
+  * `fbrinker/tileboard:dev` bundles TileBoard's source code and runs `yarn run dev` inside the container. Use it to modify the source, check your changes into GitHub and propose a pull request to TileBoard. See the TileBoard [contribution page](https://github.com/resoai/TileBoard/blob/master/CONTRIBUTING.md) for details.
+
+
 ## Example
 
 Here is an example, using Docker-Compose:

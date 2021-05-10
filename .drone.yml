@@ -1,7 +1,7 @@
 ---
 kind: pipeline
 type: docker
-name: production
+name: Production
 
 steps:
 - name: Build Dockerfile
@@ -15,6 +15,46 @@ steps:
   settings:
     repo: fbrinker/tileboard
     dockerfile: Dockerfile
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+
+trigger:
+  branch:
+  - master
+
+---
+kind: pipeline
+type: docker
+name: Development
+
+steps:
+- name: Check for changes in master branch
+  image: alpine
+  commands:
+    - apk update && apk add bash curl grep jq sed
+    - ./check-master-for-changes.sh
+
+- name: Build & Publish Development Image
+  image: plugins/docker
+  settings:
+    repo: fbrinker/tileboard
+    dockerfile: Dockerfile.nightly
+    target: dev
+    tags: dev
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+
+- name: Build & Publish Nightly Image
+  image: plugins/docker
+  settings:
+    repo: fbrinker/tileboard
+    dockerfile: Dockerfile.nightly
+    target: nightly
+    tags: nightly
     username:
       from_secret: docker_username
     password:

@@ -1,0 +1,34 @@
+## DEVELOPMENT IMAGE
+FROM node:15-alpine AS dev
+
+# Install pre-requisites
+RUN apk add --no-cache git python3
+
+# Fetch and build tileboard master branch
+RUN mkdir /tileboard-source \
+ && cd /tileboard-source/ \
+ && git clone https://github.com/resoai/TileBoard . \
+ && git checkout -b my-patch origin/master \
+ && mkdir /tileboard \
+ && ln -s /tileboard build \
+ && yarn install \
+ && yarn run build
+
+# Start Server
+WORKDIR /tileboard
+EXPOSE  8000
+EXPOSE  8080
+ENTRYPOINT ["/bin/sh", "-c", "yarn --cwd /tileboard-source run dev & python3 -m http.server"]
+
+
+
+## NIGHTLY BUILD IMAGE
+FROM python:alpine AS nightly
+
+# Copy contents from dev image
+COPY --from=dev /tileboard /tileboard
+
+# Start Server
+WORKDIR /tileboard
+EXPOSE  8000
+ENTRYPOINT python3 -m http.server
