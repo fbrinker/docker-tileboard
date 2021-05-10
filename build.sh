@@ -26,14 +26,14 @@ docker_tag_exists() {
 }
 
 source_repo="${1-resoai/TileBoard}"
-target_repo="${2-fbrinker/tileboard}"
+docker_repo="${2-fbrinker/tileboard}"
 echo "Source repository: $source_repo."
-echo "Target repository: $target_repo."
+echo "Docker repository: $docker_repo."
 
 LATEST_RELEASE=`getVersionFromLatestRelease $source_repo`
 echo "Latest release is: $LATEST_RELEASE."
 
-if docker_tag_exists $target_repo $LATEST_RELEASE; then
+if docker_tag_exists $docker_repo $LATEST_RELEASE; then
     echo "Nothing to do. Latest release tag already exists."
     exit 78 # drone.io exit code to stop but success the pipeline
 fi
