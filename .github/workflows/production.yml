@@ -12,9 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - 
-      run: |
-        apk update && apk add bash curl grep jq sed
-        ./build.sh
+      name: Build Dockerfile
+      run: ./build.sh
     - 
       name: Read .tags
       id: tags

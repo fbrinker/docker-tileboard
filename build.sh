@@ -35,7 +35,7 @@ echo "Latest release is: $LATEST_RELEASE."
 
 if docker_tag_exists $docker_repo $LATEST_RELEASE; then
     echo "Nothing to do. Latest release tag already exists."
-    exit 78 # drone.io exit code to stop but success the pipeline
+    exit 0
 fi
 
 SEMVER=( ${LATEST_RELEASE//./ } )
