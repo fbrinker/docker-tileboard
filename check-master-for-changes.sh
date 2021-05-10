@@ -13,7 +13,7 @@ echo "Last commit was $commitdate and is $commitdays days ago."
 if [ $commitdays -lt 2 ]; then
   echo "Found recent commits in the repository."
   echo "Continuing with pipeline..."
-elif [ !docker_tag_exists ]; then
+elif ! docker_tag_exists; then
   echo "Missing an nightly build."
   echo "Continuing with pipeline..."
 else
