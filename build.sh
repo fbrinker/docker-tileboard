@@ -1,36 +1,40 @@
 #!/usr/bin/env bash
 
 getVersionFromLatestRelease() {
-    version=`curl -s "https://api.github.com/repos/resoai/TileBoard/releases/latest" \
+    repo="${1-resoai/TileBoard}"
+    version=`curl -s "https://api.github.com/repos/$repo/releases/latest" \
         | grep "tag_name" \
         | cut -d '"' -f 4 \
         | sed -e "s/v//"`
-    
+
     echo "$version"
 }
 
 getDownloadUrl() {
-    url=`curl -s "https://api.github.com/repos/resoai/TileBoard/releases/latest" \
+    repo="${1-resoai/TileBoard}"
+    url=`curl -s "https://api.github.com/repos/$repo/releases/latest" \
         | grep "browser_download_url" \
         | cut -d '"' -f 4`
-    
+
     echo "$url"
 }
 
-getLatestPublishedTag() {
-    latest_tag=`curl -s "https://hub.docker.com/v2/repositories/fbrinker/tileboard/tags?page_size=1" \
-        | jq -r ".results[0].name"`
-
-    echo "$latest_tag"
+docker_tag_exists() {
+    repo="${1-fbrinker/tileboard}"
+    tag="${2-latest}"
+    curl --silent -f -lSL "https://hub.docker.com/v2/repositories/$repo/tags/$tag" > /dev/null 2>&1
 }
 
-LATEST_RELEASE=`getVersionFromLatestRelease`
-LATEST_TAG=`getLatestPublishedTag`
+source_repo="${1-resoai/TileBoard}"
+target_repo="${2-fbrinker/tileboard}"
+echo "Source repository: $source_repo."
+echo "Target repository: $target_repo."
 
-if [ "$LATEST_RELEASE" = "$LATEST_TAG" ]; then
-    echo "Nothing to do. Versions already match."
-    echo "Release: $LATEST_RELEASE"
-    echo "Tag: $LATEST_TAG"
+LATEST_RELEASE=`getVersionFromLatestRelease $source_repo`
+echo "Latest release is: $LATEST_RELEASE."
+
+if docker_tag_exists $target_repo $LATEST_RELEASE; then
+    echo "Nothing to do. Latest release tag already exists."
     exit 78 # drone.io exit code to stop but success the pipeline
 fi
 
@@ -42,6 +46,7 @@ PATCH=$LATEST_RELEASE
 echo "latest,$MAJOR,$MINOR,$PATCH" > .tags
 
 RELEASE_URL=`getDownloadUrl`
+echo "URL of release is: $RELEASE_URL."
 
-echo "Writing $RELEASE_URL into Dockerfile..."
+echo "Writing release URL into Dockerfile..."
 sed -i "s|%RELEASE_URL%|$RELEASE_URL|g" ./Dockerfile
