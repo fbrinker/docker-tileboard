@@ -1,0 +1,42 @@
+name: Build Production
+on:
+  schedule:
+    - cron: '11 2 * * *'
+  push:
+    branches:
+    - main
+    - github-actions
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - 
+      run: |
+        apk update && apk add bash curl grep jq sed
+        ./build.sh
+    - 
+      name: Read .tags
+      id: tags
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: .tags
+    - 
+      name: Echo .tags
+      run: echo ${{ steps.tags.outputs.content }}
+    -
+      name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    -
+      name: Build and push
+      id: docker_build
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: fbrinker/tileboard:latest
+    -
+      name: Image digest
+      run: echo ${{ steps.docker_build.outputs.digest }}
