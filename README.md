@@ -1,6 +1,6 @@
 # TileBoard Docker-Container
 
-[![Build Status](https://drone.f-brinker.de/api/badges/fbrinker/docker-tileboard/status.svg)](https://drone.f-brinker.de/fbrinker/docker-tileboard)
+[![Build Status](https://drone-github.f-brinker.de/api/badges/fbrinker/docker-tileboard/status.svg)](https://drone-github.f-brinker.de/fbrinker/docker-tileboard)
 [![Docker Pulls](https://badgen.net/docker/pulls/fbrinker/tileboard?icon=docker&label=pulls)](https://hub.docker.com/r/fbrinker/tileboard)
 
 This is a very basic Docker container for [TileBoard](https://github.com/resoai/TileBoard), "a simple yet highly configurable Dashboard for HomeAssistant".
@@ -9,10 +9,10 @@ It contains the sources and starts a simple Python3 webserver to serve TileBoard
 
 ### Contribute
 
-You can open any new issues [here](https://git.f-brinker.de/fbrinker/docker-tileboard/issues).
+You can open any new issues [here](https://github.com/fbrinker/docker-tileboard/issues).
 **The builds are automated** on changes of the official TileBoard repository.
 
-Have a look at the [Dockerfile](https://git.f-brinker.de/fbrinker/docker-tileboard).
+Have a look at the [Dockerfile](https://github.com/fbrinker/docker-tileboard).
 
 ## Usage
 
@@ -21,11 +21,13 @@ You have to mount your `config.js` file into the `/tileboard` directory of the D
 ## Versions / Tags
 
 Besides the latest version, you can listen to updates for a specific version:
-  * fbrinker/tileboard *(same as :latest)*
-  * fbrinker/tileboard:latest
-  * fbrinker/tileboard:2
-  * fbrinker/tileboard:2.2
-  * fbrinker/tileboard:2.2.0
+  * `fbrinker/tileboard` *(same as :latest)*
+  * `fbrinker/tileboard:latest`
+  * `fbrinker/tileboard:2`
+  * `fbrinker/tileboard:2.2`
+  * `fbrinker/tileboard:2.2.0`
+
+### Nightly/Dev-Builds
 
 Additionally, there are `nightly` and `dev` builds as follows:
   * `fbrinker/tileboard:nightly` contains a nightly build of TileBoard's `master` branch. Use it to have the most bleeding edge changes, which have not made it into a release yet.
