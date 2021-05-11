@@ -22,7 +22,7 @@ steps:
 
 trigger:
   branch:
-  - master
+  - main
 
 ---
 kind: pipeline
@@ -62,4 +62,4 @@ steps:
 
 trigger:
   branch:
-  - master
+  - main
