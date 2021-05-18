@@ -2,7 +2,7 @@
 FROM node:15-alpine AS dev
 
 # Install pre-requisites
-RUN apk add --no-cache git python3
+RUN apk add --no-cache git python3 build-base
 
 # Fetch and build tileboard master branch
 RUN mkdir /tileboard-source \
