@@ -3,7 +3,8 @@ ARG DEVPLATFORM=${TARGETPLATFORM:-linux/amd64}
 FROM --platform=$DEVPLATFORM node:15-alpine AS dev
 
 # Install pre-requisites
-RUN case $DEVPLATFORM in \
+RUN echo DEVPLATFORM: $DEVPLATFORM \
+ && case $DEVPLATFORM in \
     *arm*) apk add --no-cache git python3 build-base ;; \
     *)     apk add --no-cache git python3 ;; \
     esac
