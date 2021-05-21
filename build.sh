@@ -32,18 +32,13 @@ echo "Docker repository: $docker_repo."
 
 LATEST_RELEASE=`getVersionFromLatestRelease $source_repo`
 echo "Latest release is: $LATEST_RELEASE."
-echo "::set-output name=latest_release::$LATEST_RELEASE"
 
 SEMVER=( ${LATEST_RELEASE//./ } )
 MAJOR=${SEMVER[0]}
 MINOR=${SEMVER[0]}.${SEMVER[1]}
 PATCH=$LATEST_RELEASE
-echo "::set-output name=major::$MAJOR"
-echo "::set-output name=minor::$MINOR"
-echo "::set-output name=patch::$PATCH"
 
 echo "latest,$MAJOR,$MINOR,$PATCH" > .tags
-echo "::set-output name=tags::$(cat .tags)"
 
 RELEASE_URL=`getDownloadUrl`
 echo "URL of release is: $RELEASE_URL."
