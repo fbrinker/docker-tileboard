@@ -7,7 +7,8 @@ RUN  apk update \
     && update-ca-certificates    
 
 # Download TileBoard
-RUN wget -q -O release.zip "%RELEASE_URL%" \
+ARG RELEASE_URL
+RUN wget -q -O release.zip "${RELEASE_URL:-%RELEASE_URL%}" \
     && unzip release.zip -d /tileboard/ \
     && rm release.zip
 

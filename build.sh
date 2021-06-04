@@ -33,11 +33,6 @@ echo "Docker repository: $docker_repo."
 LATEST_RELEASE=`getVersionFromLatestRelease $source_repo`
 echo "Latest release is: $LATEST_RELEASE."
 
-if docker_tag_exists $docker_repo $LATEST_RELEASE; then
-    echo "Nothing to do. Latest release tag already exists."
-    exit 78 # drone.io exit code to stop but success the pipeline
-fi
-
 SEMVER=( ${LATEST_RELEASE//./ } )
 MAJOR=${SEMVER[0]}
 MINOR=${SEMVER[0]}.${SEMVER[1]}
@@ -47,6 +42,12 @@ echo "latest,$MAJOR,$MINOR,$PATCH" > .tags
 
 RELEASE_URL=`getDownloadUrl`
 echo "URL of release is: $RELEASE_URL."
+echo "::set-output name=release_url::$RELEASE_URL"
+
+if docker_tag_exists $docker_repo $LATEST_RELEASE; then
+    echo "Nothing to do. Latest release tag already exists."
+    exit 78 # drone.io exit code to stop but success the pipeline
+fi
 
 echo "Writing release URL into Dockerfile..."
 sed -i "s|%RELEASE_URL%|$RELEASE_URL|g" ./Dockerfile
