@@ -1,14 +1,10 @@
 ## DEVELOPMENT IMAGE
-ARG DEVPLATFORM=${TARGETPLATFORM:-linux/amd64}
-FROM --platform=$DEVPLATFORM node:15-alpine AS dev
+# Note: When building cross-platform nightly images, use --platform=<native-arch> to increase efficiency.
+FROM node:15-alpine AS dev
 
 # Install pre-requisites
-ARG DEVPLATFORM
-RUN echo DEVPLATFORM: $DEVPLATFORM \
- && case $DEVPLATFORM in \
-    *arm*) apk add --no-cache git python3 build-base ;; \
-    *)     apk add --no-cache git python3 ;; \
-    esac
+# Note: On ARM, also install build-base for compiling the node-sass dependency.
+RUN apk add --no-cache git python3
 
 # Fetch and build tileboard master branch
 RUN mkdir /tileboard-source \
