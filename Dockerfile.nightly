@@ -1,7 +1,9 @@
 ## DEVELOPMENT IMAGE
+# Note: When building cross-platform nightly images, use --platform=<native-arch> to increase efficiency.
 FROM node:15-alpine AS dev
 
 # Install pre-requisites
+# Note: On ARM, also install build-base for compiling the node-sass dependency.
 RUN apk add --no-cache git python3
 
 # Fetch and build tileboard master branch
